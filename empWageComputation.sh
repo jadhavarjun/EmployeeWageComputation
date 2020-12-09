@@ -2,7 +2,6 @@
 
 echo "Welcome to employee Wage Program"
 
-
 isPartTime=1
 isFullTime=2
 EmpRateperHr=20
@@ -12,12 +11,9 @@ maxHrsInmonth=100
 TotalempHr=0
 TotalWorkingDay=0
 
-while [[ $TotalempHr -le $maxHrsInmonth && $TotalWorkingDay -le $WorkingDays ]]
-do
-        (($TotalWorkingDay+1))
-       empcheck=$(($RANDOM%3))
-
-	case $empcheck in
+function getWorkingHrs ()
+{
+        case $1 in
                         $isFullTime)
                                         empHrs=8
                                 ;;
@@ -30,9 +26,18 @@ do
                                 ;;
 
                 esac
-        salary=$(($empHrs*$EmpRateperHr))
- 		Totalsalary=$(($Totalsalary+$salary))
+
+       echo $empHrs
+}
+
+while [[ $TotalempHrs -le $maxHrsInmonth && $TotalWorkingDays -le $WorkingDays ]]
+do
+        (($TotalWorkingDays+1))
+	empHrs=$( getWorkingHrs $(($RANDOM%3)) )
+	TotalempHrs=$(($TotalempHrs+$empHrs))
 done
 
+totalsalary=$(($TotalempHrs*$EmpRateperHr))
 
-echo "Total Salary For Month Of Employee Is : $Totalsalary"
+
+echo "Total Salary Of Employee Is : $totalsalary"
