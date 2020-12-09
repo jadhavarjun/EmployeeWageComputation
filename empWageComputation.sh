@@ -2,29 +2,33 @@
 
 echo "Welcome to employee Wage Program"
 
-echo -ne "\n1. Part Time \n2. Full Time \n3.Enter Empolyee Type : \n"
 
-choice=$((RANDOM%3))
-echo $choice
+isPartTime=1
+isFullTime=2
+Totalsalary=0
+EmpRateperHr=20
+WorkingDays=20
 
-WagePerHr=20
-FullDayHrs=8
-PartTimeHrs=4
+for ((day=1;day<=WorkingDays;day++))
+do
+        empcheck=$(($RANDOM%3))
 
-case $choice in
+	case $empcheck in
+             	 $isFullTime)
+                        empHrs=8
+                             ;;
+                 $isPartTime)
+                        empHrs=4
+                             ;;
 
-	1)
-        		dailywages=$(($WagePerHr*$PartTimeHrs))
-        		echo -ne "The Part Time Wages Of Empoyee Is : $dailywages"
-			;;
+                 *)
+                        empHrs=0
+                             ;;
 
-	2)
+                esac
+        salary=$(($empHrs*$EmpRateperHr))
+ 	Totalsalary=$(($Totalsalary+$salary))
+done
 
-        		dailywages=$(($WagePerHr*$FullDayHrs))
-        		echo "The Daily Wages Of Empoyee Is : $dailywages"
-			;;
 
-	*)
-	        	echo "Employee Is Absent"
-			;;
-esac
+echo "Total Salary For Month Of Employee Is : $Totalsalary"
