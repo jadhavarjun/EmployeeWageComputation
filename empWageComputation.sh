@@ -1,33 +1,37 @@
-#!/bin/bash
+#!/bin/bash -x
 
 echo "Welcome to employee Wage Program"
 
 
 isPartTime=1
 isFullTime=2
-Totalsalary=0
 EmpRateperHr=20
 WorkingDays=20
+maxHrsInmonth=100
 
-for ((day=1;day<=WorkingDays;day++))
+TotalempHr=0
+TotalWorkingDay=0
+
+while [[ $TotalempHr -le $maxHrsInmonth && $TotalWorkingDay -le $WorkingDays ]]
 do
-        empcheck=$(($RANDOM%3))
+        (($TotalWorkingDay+1))
+       empcheck=$(($RANDOM%3))
 
 	case $empcheck in
-             	 $isFullTime)
-                        empHrs=8
-                             ;;
-                 $isPartTime)
-                        empHrs=4
-                             ;;
+                        $isFullTime)
+                                        empHrs=8
+                                ;;
+                        $isPartTime)
+                                        empHrs=4
+                                ;;
 
-                 *)
-                        empHrs=0
-                             ;;
+                         *)
+                                        empHrs=0
+                                ;;
 
                 esac
         salary=$(($empHrs*$EmpRateperHr))
- 	Totalsalary=$(($Totalsalary+$salary))
+ 		Totalsalary=$(($Totalsalary+$salary))
 done
 
 
