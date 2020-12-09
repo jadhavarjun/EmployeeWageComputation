@@ -1,24 +1,30 @@
-#!/bin/bash -x
+#!/bin/bash
 
 echo "Welcome to employee Wage Program"
+
+echo -ne "\n1. Part Time \n2. Full Time \n3.Enter Empolyee Type : \n"
+
+choice=$((RANDOM%3))
+echo $choice
 
 WagePerHr=20
 FullDayHrs=8
 PartTimeHrs=4
 
-var=$(($RANDOM%3))
+case $choice in
 
-if [ $var -eq 1 ]
-then
-        dailywages=$(($WagePerHr*$FullDayHrs))
-	echo "The Full Day Wage Of Employee Is  : $dailywages"
+	1)
+        		dailywages=$(($WagePerHr*$PartTimeHrs))
+        		echo -ne "The Part Time Wages Of Empoyee Is : $dailywages"
+			;;
 
-elif [ $var -eq 2 ]
-then
-        dailywages=$(($WagePerHr*$PartTimeHrs))
-        echo "The Part Time Wage Of Employee Is  : $dailywages"
+	2)
 
-else
-        echo "Employee Is Absent"
-fi
+        		dailywages=$(($WagePerHr*$FullDayHrs))
+        		echo "The Daily Wages Of Empoyee Is : $dailywages"
+			;;
 
+	*)
+	        	echo "Employee Is Absent"
+			;;
+esac
